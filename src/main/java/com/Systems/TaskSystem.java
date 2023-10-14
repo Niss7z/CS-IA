@@ -11,11 +11,13 @@ public class TaskSystem {
     private static ArrayList<Task> all_tasks;
 
     public ArrayList<Folder> getAll_folders() {
-        return all_folders;
+        DatabaseConnection db = new DatabaseConnection();
+        return db.getAllFolders();
     }
 
     public ArrayList<Task> getAll_tasks(){
-        return all_tasks;
+        DatabaseConnection db = new DatabaseConnection();
+        return db.getAllTasks();
     }
 
     // because tasks can be moved to other folders

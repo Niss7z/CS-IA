@@ -85,10 +85,6 @@ public class DatabaseConnection {
                 String start_date = resultSet.getString("start_date");
                 String due_date = resultSet.getString("due_date");
                 String description = resultSet.getString("description");
-                boolean isComplete = resultSet.getBoolean("is_complete");
-
-
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -142,4 +138,5 @@ public class DatabaseConnection {
         }
         return folders;
     }
+
 }
