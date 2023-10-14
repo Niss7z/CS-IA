@@ -42,6 +42,30 @@ public class DatabaseConnection {
         }
     }
 
+    public void insertTask(Task task, Folder folder, String name){
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL)){
+            String sql = "INSERT INTO tasks(task_id,folder_id,name,status_id,parent_task_id,start_date,end_date,description) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            // Map the Task object properties to the database columns
+            preparedStatement.setInt(1, task.getId());
+            preparedStatement.setInt(2,task.getParent_folder().getId());
+            preparedStatement.setString(3,task.getName());
+            preparedStatement.setInt(4,task.getStatus().getId());
+            preparedStatement.setInt(5,task.getParent().getId());
+            preparedStatement.setString(6, task.getStart_date());
+            preparedStatement.setString(7, task.getDue_date());
+            preparedStatement.setString(8, task.getDescription());
+
+            // Execute the SQL query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
     // Update a task in the database
     public void updateTask(Task task) {
         try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {

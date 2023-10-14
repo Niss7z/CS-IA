@@ -1,5 +1,7 @@
 package com.models;
 
+import javafx.scene.Parent;
+
 import java.util.ArrayList;
 
 public class Task {
@@ -31,6 +33,8 @@ public class Task {
     public void setId(int id){this.id = id;}
 
     public Task getParent(){return parent;}
+    public void setParent(Task parent){this.parent = parent;
+    }
 
     public String getName(){return name;}
     public void setName(String name){ this.name = name;}
