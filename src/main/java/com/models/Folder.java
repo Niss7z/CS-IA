@@ -1,20 +1,27 @@
 package com.models;
 
 
+import javafx.scene.Parent;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Folder {
     private int id;
     private String name;
     private ArrayList<Task> tasks;
-    private int parent_id;
-    public Folder(int id, String name, ArrayList<Task> tasks, int parent_id){
+    private Folder parent;
+    public Folder(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public Folder (int id, String name, ArrayList<Task> tasks, Folder parent){
         this.id = id;
         this.name = name;
         this.tasks = tasks;
-        this.parent_id = parent_id;
+        this.parent = parent;
     }
-
     public int getId(){return id;}
     public void setId(int id){
         this.id = id;
@@ -30,11 +37,11 @@ public class Folder {
         this.tasks=tasks;
     }
 
-    public int getParent_id(){
-        return parent_id;
+    public Folder getParent(){
+        return parent;
     }
-    public void setParent_id(int parent_id){
-        this.parent_id=parent_id;
+    public void setParent(Folder parent){
+        this.parent = parent;
     }
 
 }

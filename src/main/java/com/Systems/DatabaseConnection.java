@@ -45,7 +45,7 @@ public class DatabaseConnection {
     // Update a task in the database
     public void updateTask(Task task) {
         try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
-            // Define the SQL query
+            // SQL Query
             String sql = "UPDATE tasks SET task_id=?, folder_id=?, name=?, status_id=?, parent_task_id=?, " +
                     "start_date=?, due_date=?, description=?, WHERE task_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class DatabaseConnection {
             String sql = "UPDATE folders SET name=?, parent_id=? WHERE id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, folder.getName());
-            preparedStatement.setInt(2, folder.getParent_id());
+            preparedStatement.setInt(2, folder.getParent().getId());
             preparedStatement.setInt(3, folder.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -128,9 +128,7 @@ public class DatabaseConnection {
             while (resultSet.next()) {
                 int folderId = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                int parentId = resultSet.getInt("parent_id");
-
-                Folder folder = new Folder(folderId, name, null, parentId); // Modify this line accordingly
+                Folder folder = new Folder(folderId, name);
                 folders.add(folder);
             }
         } catch (SQLException e) {
