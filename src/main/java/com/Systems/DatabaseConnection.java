@@ -21,19 +21,19 @@ public class DatabaseConnection {
     public void insertTask(Task task) {
         try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
             // Define the SQL query
-            String sql = "INSERT INTO tasks(folder_id, name, status_id, parent_task_id, start_date, due_date, description, is_complete) " +
+            String sql = "INSERT INTO tasks(task_id,folder_id,name,status_id,parent_task_id,start_date,end_date,description) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Map the Task object properties to the database columns
             preparedStatement.setInt(1, task.getId());
-            preparedStatement.setString(2, task.getName());
-            preparedStatement.setInt(3, task.getStatus().getID());
-            preparedStatement.setInt(4, task.getParent().getId());
-            preparedStatement.setString(5, task.getStart_date());
-            preparedStatement.setString(6, task.getDue_date());
-            preparedStatement.setString(7, task.getDescription());
-            preparedStatement.setBoolean(8, task.getIsComplete());
+            preparedStatement.setInt(2,task.getParent_folder().getId());
+            preparedStatement.setString(3,task.getName());
+            preparedStatement.setInt(4,task.getStatus().getId());
+            preparedStatement.setInt(5,task.getParent().getId());
+            preparedStatement.setString(6, task.getStart_date());
+            preparedStatement.setString(7, task.getDue_date());
+            preparedStatement.setString(8, task.getDescription());
 
             // Execute the SQL query
             preparedStatement.executeUpdate();
@@ -46,20 +46,19 @@ public class DatabaseConnection {
     public void updateTask(Task task) {
         try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
             // Define the SQL query
-            String sql = "UPDATE tasks SET folder_id=?, name=?, status_id=?, parent_task_id=?, " +
-                    "start_date=?, due_date=?, description=?, is_complete=? WHERE task_id=?";
+            String sql = "UPDATE tasks SET task_id=?, folder_id=?, name=?, status_id=?, parent_task_id=?, " +
+                    "start_date=?, due_date=?, description=?, WHERE task_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Map the Task object properties to the database columns
-            preparedStatement.setInt(1, task.getFolderId());
-            preparedStatement.setString(2, task.getName());
-            preparedStatement.setInt(3, task.getStatusId());
-            preparedStatement.setInt(4, task.getParent().getId());
-            preparedStatement.setString(5, task.getStart_date());
-            preparedStatement.setString(6, task.getDue_date());
-            preparedStatement.setString(7, task.getDescription());
-            preparedStatement.setBoolean(8, task.getIsComplete());
-            preparedStatement.setInt(9, task.getId());
+            preparedStatement.setInt(1, task.getId());
+            preparedStatement.setInt(2,task.getParent_folder().getId());
+            preparedStatement.setString(3,task.getName());
+            preparedStatement.setInt(4,task.getStatus().getId());
+            preparedStatement.setInt(5,task.getParent().getId());
+            preparedStatement.setString(6, task.getStart_date());
+            preparedStatement.setString(7, task.getDue_date());
+            preparedStatement.setString(8, task.getDescription());
 
             // Execute the SQL query
             preparedStatement.executeUpdate();
@@ -88,8 +87,8 @@ public class DatabaseConnection {
                 String description = resultSet.getString("description");
                 boolean isComplete = resultSet.getBoolean("is_complete");
 
-                Task task = new Task(taskId, folderId, name, start_date, due_date, statusId, parentTaskId, description, isComplete);
-                tasks.add(task);
+
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
