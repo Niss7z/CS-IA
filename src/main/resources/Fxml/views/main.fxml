@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="40.0" style="-fx-background-color: &quot;734c4c&quot;;" />
+      <Pane fx:id="midBar" prefHeight="832.0" prefWidth="203.0" style="-fx-background-color: &quot;c68080&quot;;">
+         <children>
+            <VBox layoutY="31.0" prefHeight="218.0" prefWidth="203.0">
+               <children>
+                  <Button fx:id="toInbox" mnemonicParsing="false" prefHeight="61.0" prefWidth="204.0" text="Inbox" />
+                  <Button fx:id="toToday" mnemonicParsing="false" prefHeight="66.0" prefWidth="205.0" text="Today" />
+                  <Button fx:id="toNextWeek" mnemonicParsing="false" prefHeight="64.0" prefWidth="209.0" text="Next Week" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="contentTask" prefHeight="832.0" prefWidth="1037.0" style="-fx-background-color: f2c9c9;" />
+   </children>
+</HBox>
